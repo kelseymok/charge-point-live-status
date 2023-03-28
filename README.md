@@ -12,16 +12,7 @@
 {
   "charge_point_id": "123",
   "last_message_timestamp": "2023-01-01T09:00:00+00:00",
-  "composite_status": "up",
-  "status_notification_payload": {
-    "connector_id": 1, 
-    "error_code": "NoError", 
-    "status": "Charging", 
-    "timestamp": "2023-01-01T09:00:00Z", 
-    "info": null, 
-    "vendor_id": null, 
-    "vendor_error_code": null
-  }
+  "composite_status": "up"
 }
 ```
 

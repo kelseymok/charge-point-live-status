@@ -12,11 +12,15 @@
 {
   "charge_point_id": "123",
   "last_message_timestamp": "2023-01-01T09:00:00+00:00",
-  "composite_status": "up"
+  "composite_status": "up",
+  "available_for_charging": "1",
+  "requires_maintenance": "-1"
 }
 ```
 
 ### Composite Status
+This may not be so useful because it conflates if the charger is erroneous or just purposefully taken offline
+
 | UP | DOWN | Vector |
 | -- |------| --- |
 | 0 | > 0  | `StatusNotification.errors` in the last 1 hour |
@@ -24,7 +28,16 @@
 | "operative"  | "inoperative"  | last `StatusNotification.status` |
 | < 0.05 | >= 0.05 | Anomaly Detection (TBD) |
 
-**TOOD:** How should we weight these?
+### Available for Charging
+* 1 if the last StatusNotification.status == operative
+* -1 if the last StatusNotification.status == inoperative
+
+### Requires Maintenance
+Probability marker
+*  `StatusNotification.errors` in the last 1 hour
+* `StatusNotification.vendor_error_codes` in the last hour
+* `StatusNotification.status` == Faulted
+* Anomaly Detection => operates on Analytical Data and is another service that feeds into this one
 
 ## OCPP References
 ### StatusNotification Request

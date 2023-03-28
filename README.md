@@ -26,10 +26,12 @@
 ```
 
 ### Composite Status
-A composite Status is "DOWN" if the charge point has reported:
-* any `StatusNotification.errors` in the last 1 hour, 
-* any `StatusNotification.vendor_error_codes` in the last hour
-* if the last `StatusNotification.status` is not in the "inoperative" category
+| UP | DOWN | Vector |
+| -- |------| --- |
+| 0 | > 0  | `StatusNotification.errors` in the last 1 hour |
+| 0 | > 0  | `StatusNotification.vendor_error_codes` in the last hour |
+| "operative"  | "inoperative"  | last `StatusNotification.status` |
+| < 0.05 | >= 0.05 | Anomaly Detection (TBD) |
 
 **TOOD:** How should we weight these?
 

@@ -1,5 +1,37 @@
 # Charge Live Status (POC)
 
+## Architecture
+* Kafka topic for StatusNotification Requests
+* Kafka Consumer which updates a KV Store (DynamoDB)
+* DynamoDB
+* Kafka Topic to broadcast new changes in status
+
+
+## Expected Output
+```json
+{
+  "charge_point_id": "123",
+  "last_message_timestamp": "2023-01-01T09:00:00+00:00",
+  "composite_status": "up",
+  "status_notification_payload": {
+    "connector_id": 1, 
+    "error_code": "NoError", 
+    "status": "Charging", 
+    "timestamp": "2023-01-01T09:00:00Z", 
+    "info": null, 
+    "vendor_id": null, 
+    "vendor_error_code": null
+  }
+}
+```
+
+### Composite Status
+A composite Status is "DOWN" if the charge point has reported:
+* any `StatusNotification.errors` in the last 1 hour, 
+* any `StatusNotification.vendor_error_codes` in the last hour
+* if the last `StatusNotification.status` is not in the "inoperative" category
+
+**TOOD:** How should we weight these?
 
 ## OCPP References
 ### StatusNotification Request

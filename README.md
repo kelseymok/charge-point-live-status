@@ -1,5 +1,14 @@
 # Charge Live Status (POC)
 
+## Quickstart
+1. Ensure docker is running
+    ```bash
+    # If using Colima
+    colima start --cpu 4 --memory 8
+    ```
+2. `docker-compose up`
+3. Kafka Control Center (view messages): [http://localhost:9021/](http://localhost:9021/)
+
 ## Architecture
 * Kafka topic for StatusNotification Requests
 * Kafka Consumer which updates a KV Store (DynamoDB)

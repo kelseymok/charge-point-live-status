@@ -1,14 +1,15 @@
 # Charge Live Status (POC)
 
 ## Quickstart
-1. Ensure docker is running
+1. Ensure you have Python 3.9+ ([pyenv](https://github.com/pyenv/pyenv))
+2. Ensure docker is running
     ```bash
     # If using Colima
     colima start --cpu 4 --memory 8
     ```
-2. `docker-compose up`
-3. Kafka Control Center (view messages): [http://localhost:9021/](http://localhost:9021/)
-4. API endpoint: [http://localhost:8080/charge_point_live_status/](http://localhost:8080/charge_point_live_status)
+3. `docker-compose up`
+4. Kafka Control Center (view messages): [http://localhost:9021/](http://localhost:9021/)
+5. API endpoint (at least 25 seconds after startup for the seeder to run): [http://localhost:8080/charge_point_live_status/](http://localhost:8080/charge_point_live_status)
 
 ## Components
 * Kafka Producer to push data to topics at a certain rate

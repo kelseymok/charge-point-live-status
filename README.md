@@ -8,15 +8,18 @@
     ```
 2. `docker-compose up`
 3. Kafka Control Center (view messages): [http://localhost:9021/](http://localhost:9021/)
+4. API endpoint: [http://localhost:8080/charge_point_live_status/](http://localhost:8080/charge_point_live_status)
 
-## Architecture
+## Components
+* Kafka Producer to push data to topics at a certain rate
 * Kafka topic for StatusNotification Requests
 * Kafka Consumer which updates a KV Store (DynamoDB)
-* DynamoDB
-* Kafka Topic to broadcast new changes in status
+* Storage (DynamoDB) to store latest Charge Point Statuses
+* API to access Charge Point Statuses
 
 
 ## Expected Output
+This is outdated. Needs to be reworked
 ```json
 {
   "charge_point_id": "123",
@@ -106,3 +109,5 @@ Probability marker
 | Reserved  | true      | When a Connector becomes reserved as a result of a Reserve Now command |
 | Unavailable  | false     | When a Connector becomes unavailable as the result of a Change Availability command or an event upon which the Charge Point transitions to unavailable at its discretion. Upon receipt of a Change Availability command, the status MAY change immediately or the change MAY be scheduled. When scheduled, the Status Notification shall be send when the availability change becomes effective |
 | Faulted | false     | When a Charge Point or connector has reported an error and is not available for energy delivery. |
+
+https://www.openchargealliance.org/uploads/files/improving_uptime_with_ocpp-v10.pdf

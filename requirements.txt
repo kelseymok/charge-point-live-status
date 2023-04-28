@@ -1,2 +1,5 @@
 pytest
 confluent-kafka
+boto3
+fastapi
+uvicorn

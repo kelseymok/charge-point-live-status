@@ -211,3 +211,25 @@ services:
       DELAY_START_SECONDS: "180"
       TOPICS_TO_CONSUME: "StatusNotificationRequest"
       CONSUMER_GROUP_ID: "status_notification_request_transformer"
+      STORAGE_HOST: "storage"
+      STORAGE_PORT: "8000"
+  storage:
+    image: amazon/dynamodb-local
+    container_name: storage
+    ports:
+      - "8000:8000"
+  storage-seeder:
+    build: storage_seeder/.
+    container_name: storage-seeder
+    environment:
+      DELAY_START_SECONDS: "20"
+      STORAGE_HOST: "storage"
+      STORAGE_PORT: "8000"
+  api:
+    build: api/.
+    container_name: api
+    environment:
+      READER_HOST: "storage"
+      READER_PORT: "8000"
+    ports:
+      - "8080:8080"

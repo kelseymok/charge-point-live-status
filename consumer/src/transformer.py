@@ -6,9 +6,6 @@ import json
 
 class Transformer:
 
-    def _encode(self, data: Dict) -> bytes:
-        return base64.b64encode(json.dumps(data).encode("utf-8"))
-
     def process(self, payload: str):
         data = json.loads(payload)
         result = self._status_notification_extractor(data)
@@ -31,4 +28,4 @@ class Transformer:
             "vendor_error_code": data["body"]["vendor_error_code"],
         }
 
-        return self._encode(flattened)
+        return flattened

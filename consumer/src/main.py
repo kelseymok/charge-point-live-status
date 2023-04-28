@@ -1,16 +1,30 @@
 from time import sleep
 
+import boto3
 from confluent_kafka import Consumer, KafkaError, KafkaException
 import os
 import logging
 
+from data_writer import DataWriter
 from transformer import Transformer
 
 delay = os.environ.get("DELAY_START_SECONDS", 240)
 sleep(int(delay))
 
 group_id = os.environ.get("CONSUMER_GROUP_ID")
-group_id = "status_notification_request_transformer"
+storage_host = os.environ.get("STORAGE_HOST")
+storage_port = os.environ.get("STORAGE_PORT")
+
+
+dynamodb_client = boto3.client(
+    'dynamodb',
+    region_name='local',
+    endpoint_url=f"http://{storage_host}:{storage_port}",
+    aws_access_key_id="X",
+    aws_secret_access_key="X"
+)
+
+data_writer = DataWriter(client=dynamodb_client)
 
 conf = {
     'bootstrap.servers': os.environ.get("BOOTSTRAP_SERVERS", "localhost:9092"),
@@ -43,6 +57,7 @@ def basic_consume_loop(consumer, topics):
             else:
                 decoded_message = msg.value().decode("utf-8")
                 data = transformer.process(decoded_message)
+                data_writer.write(data)
     finally:
         # Close down consumer to commit final offsets.
         consumer.close()

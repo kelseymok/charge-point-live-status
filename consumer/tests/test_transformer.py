@@ -32,10 +32,9 @@ class TestTransformer:
             "write_timestamp_epoch":1672577647750
         }
         transformer = Transformer()
-        data_bytes = transformer._status_notification_extractor(data)
-        assert data_bytes == b'eyJtZXNzYWdlX2lkIjogIjMzOGMxMTJjLTQyMGMtNGRmNC04MzE4LTIxNjA4NzVlYjUzMiIsICJtZXNzYWdlX3R5cGUiOiAyLCAiY2hhcmdlX3BvaW50X2lkIjogIjAxYTBmMDM5LTc2ODUtNGE3Zi05ZWY2LThkMjYyYTc4OThmYiIsICJhY3Rpb24iOiAiU3RhdHVzTm90aWZpY2F0aW9uIiwgIndyaXRlX3RpbWVzdGFtcCI6ICIyMDIzLTAxLTAxVDEyOjU0OjA3Ljc1MDI4NiswMDowMCIsICJ3cml0ZV90aW1lc3RhbXBfZXBvY2giOiAxNjcyNTc3NjQ3NzUwLCAiY29ubmVjdG9yX2lkIjogMSwgImVycm9yX2NvZGUiOiAiTm9FcnJvciIsICJzdGF0dXMiOiAiUHJlcGFyaW5nIiwgInRpbWVzdGFtcCI6ICIyMDIzLTAxLTAxVDEyOjU0OjA3Ljc1MDI4NiswMDowMCIsICJpbmZvIjogbnVsbCwgInZlbmRvcl9pZCI6IG51bGwsICJ2ZW5kb3JfZXJyb3JfY29kZSI6IG51bGx9'
+        result = transformer._status_notification_extractor(data)
 
-        assert json.loads(base64.b64decode(data_bytes).decode("utf-8")) == {
+        assert result == {
             "message_id": "338c112c-420c-4df4-8318-2160875eb532",
             "message_type": 2,
             "charge_point_id": "01a0f039-7685-4a7f-9ef6-8d262a7898fb",

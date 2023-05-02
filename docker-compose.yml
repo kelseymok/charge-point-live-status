@@ -235,6 +235,7 @@ services:
       - "8080:8080"
   consumer-notebook:
     image: jupyter/scipy-notebook:2023-02-28
+    container_name: consumer-notebook
     ports:
       - "8888:8888"
       - "8050:8050"

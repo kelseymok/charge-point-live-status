@@ -10,6 +10,7 @@
 3. `docker-compose up`
 4. Kafka Control Center (view messages): [http://localhost:9021/](http://localhost:9021/)
 5. API endpoint (at least 25 seconds after startup for the seeder to run): [http://localhost:8080/charge_point_live_status/](http://localhost:8080/charge_point_live_status)
+6. `docker logs -f consumer-notebook` and find the section that looks like  "Or copy and paste one of these URLs:" and select the url that starts with `http://127.0.0.1:8888/lab?token=...`
 
 ## Components
 * Kafka Producer to push data to topics at a certain rate
@@ -17,7 +18,7 @@
 * Kafka Consumer which updates a KV Store (DynamoDB)
 * Storage (DynamoDB) to store latest Charge Point Statuses
 * API to access Charge Point Statuses
-
+* Dash App (in a Jupyter Notebook) to run a visualisation
 
 ## Expected Output
 This is outdated. Needs to be reworked
@@ -112,3 +113,4 @@ Probability marker
 | Faulted | false     | When a Charge Point or connector has reported an error and is not available for energy delivery. |
 
 https://www.openchargealliance.org/uploads/files/improving_uptime_with_ocpp-v10.pdf
+

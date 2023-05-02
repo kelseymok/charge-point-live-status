@@ -1,5 +1,6 @@
 import json
 import uuid
+import random
 
 from dateutil import parser
 from datetime import datetime, timezone, timedelta
@@ -21,12 +22,19 @@ class GenerateStatusNotifications:
                 collect.append(result)
                 frozen_datetime.tick(freq)
         return collect
+    def _gen_random_error_code(self, status: str):
+        if status == "faulted":
+            return ChargePointErrorCode._member_names_[random.randint(0, len(ChargePointStatus._member_names_) - 1)]
+        else:
+            return "no_error"
 
     def _status_notification_payload(self, timestamp):
+        random_status = ChargePointStatus._member_names_[random.randint(0, len(ChargePointStatus._member_names_)-1)]
+        random_error_code = self._gen_random_error_code(random_status)
         return call.StatusNotificationPayload(
             connector_id=1,
-            error_code=ChargePointErrorCode.no_error,
-            status=ChargePointStatus.finishing,
+            error_code=getattr(ChargePointErrorCode, random_error_code),
+            status=getattr(ChargePointStatus, random_status),
             timestamp=timestamp
         ).__dict__
 

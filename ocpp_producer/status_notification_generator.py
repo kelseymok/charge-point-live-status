@@ -42,6 +42,7 @@ class GenerateStatusNotifications:
         return {
             "charge_point_id": str(charge_point_id),
             "action": "StatusNotification",
+            "message_type": 2,
             "body": json.dumps(data),
             "timestamp": data["timestamp"]
         }

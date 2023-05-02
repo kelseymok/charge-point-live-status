@@ -3,3 +3,6 @@ confluent-kafka
 boto3
 fastapi
 uvicorn
+ocpp
+freezegun
+pandas

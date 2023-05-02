@@ -201,7 +201,7 @@ services:
       BOOTSTRAP_SERVERS: "broker:29092"
       DELAY_START_SECONDS: "120"
       MESSAGE_DELAY: "1"
-      DATA_FILE: "data/only_status_notification_requests.json"
+      DATA_FILE: "data/1683022811.json"
   consumer:
     build: consumer/.
     container_name: consumer

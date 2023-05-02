@@ -44,7 +44,7 @@ class GenerateStatusNotifications:
             "action": "StatusNotification",
             "message_type": 2,
             "body": json.dumps(data),
-            "timestamp": data["timestamp"]
+            "timestamp": data["timestamp"] # => only for sorting later on (it's actually removed later)
         }
 
     def generate(self):
@@ -54,8 +54,9 @@ class GenerateStatusNotifications:
            charge_point_id = uuid.uuid4()
            collect = collect + [ self.decorate(charge_point_id, x) for x in self.pulse("2023-01-01T09:00:00+00:00", "2023-01-01T18:00:00+00:00") ]
         df = pd.DataFrame(collect)
-        df["timestamp"] = to_datetime(df["timestamp"]).sort_values()
-        df.drop(["timestamp"], axis=1, inplace=True)
+        df["timestamp_new"] = to_datetime(df["timestamp"])
+        df.sort_values(by=['timestamp_new'], ascending=True, inplace=True)
+        df.drop(["timestamp_new", "timestamp"], axis=1, inplace=True)
         now = int(datetime.now(timezone.utc).timestamp())
         df.to_json(f"./data/{now}.json", orient="records")
 

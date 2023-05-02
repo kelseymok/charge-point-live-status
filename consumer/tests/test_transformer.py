@@ -15,11 +15,11 @@ class TestTransformer:
 
     def test__status_notification_request_reshaper(self):
         data = {
-            "message_id": "338c112c-420c-4df4-8318-2160875eb532",
+            # "message_id": "338c112c-420c-4df4-8318-2160875eb532",
             "message_type": 2,
             "charge_point_id": "01a0f039-7685-4a7f-9ef6-8d262a7898fb",
             "action": "StatusNotification",
-            "write_timestamp": "2023-01-01T12:54:07.750286+00:00",
+            # "write_timestamp": "2023-01-01T12:54:07.750286+00:00",
             "body": {
                 "connector_id": 1,
                 "error_code": "NoError",
@@ -29,17 +29,17 @@ class TestTransformer:
                 "vendor_id": None,
                 "vendor_error_code": None
             },
-            "write_timestamp_epoch":1672577647750
+            # "write_timestamp_epoch":1672577647750
         }
         transformer = Transformer()
         result = transformer._status_notification_extractor(data)
 
         assert result == {
-            "message_id": "338c112c-420c-4df4-8318-2160875eb532",
+            # "message_id": "338c112c-420c-4df4-8318-2160875eb532",
             "message_type": 2,
             "charge_point_id": "01a0f039-7685-4a7f-9ef6-8d262a7898fb",
             "action": "StatusNotification",
-            "write_timestamp": "2023-01-01T12:54:07.750286+00:00",
+            # "write_timestamp": "2023-01-01T12:54:07.750286+00:00",
             "connector_id": 1,
             "error_code": "NoError",
             "status": "Preparing",
@@ -47,5 +47,5 @@ class TestTransformer:
             "info": None,
             "vendor_id": None,
             "vendor_error_code": None,
-            "write_timestamp_epoch": 1672577647750
+            # "write_timestamp_epoch": 1672577647750
         }

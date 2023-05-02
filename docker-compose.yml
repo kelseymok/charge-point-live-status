@@ -233,3 +233,10 @@ services:
       READER_PORT: "8000"
     ports:
       - "8080:8080"
+  consumer-notebook:
+    image: jupyter/scipy-notebook:2023-02-28
+    ports:
+      - "8888:8888"
+      - "8050:8050"
+    volumes:
+      - ./consumer-notebook:/home/jovyan/work

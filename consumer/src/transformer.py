@@ -13,12 +13,12 @@ class Transformer:
 
     def _status_notification_extractor(self, data: Dict) -> bytes:
         flattened = {
-            "message_id": data["message_id"],
+            # "message_id": data["message_id"],
             "message_type": data["message_type"],
             "charge_point_id": data["charge_point_id"],
             "action": data["action"],
-            "write_timestamp": data["write_timestamp"],
-            "write_timestamp_epoch": data["write_timestamp_epoch"],
+            # "write_timestamp": data["write_timestamp"],
+            # "write_timestamp_epoch": data["write_timestamp_epoch"],
             "connector_id": data["body"]["connector_id"],
             "error_code": data["body"]["error_code"],
             "status": data["body"]["status"],
